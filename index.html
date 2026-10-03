@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Максим Орлов — бизнес-консультант в Санкт-Петербурге | Стратегия, финансы, операционка</title>
+<meta name="description" content="Бизнес-консультант Максим Орлов. Помогаю собственникам и CEO строить систему роста: стратегия, юнит-экономика, операционная эффективность. Санкт-Петербург, очно и онлайн.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   RESET & TOKENS
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0B0B0C;
+  --surface:#121214;
+  --surface-2:#17171A;
+  --line:rgba(255,255,255,.09);
+  --line-strong:rgba(255,255,255,.18);
+  --ink:#F2F2EF;
+  --ink-soft:#9A9A97;
+  --ink-mute:#5E5E5C;
+  --acid:#CCFF00;
+  --acid-dim:#A8D400;
+  --warm:#F2EDE4;
+  --font-h:'Space Grotesk', system-ui, sans-serif;
+  --font-b:'Inter', system-ui, sans-serif;
+  --font-m:'JetBrains Mono', ui-monospace, monospace;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --gutter:clamp(20px, 4vw, 56px);
+}
+html{scroll-behavior:smooth; -webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-b);
+  font-size:16px;
+  line-height:1.6;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
+::selection{background:var(--acid);color:#000}
+
+/* ============================================================
+   LAYOUT HELPERS
+   ============================================================ */
+.wrap{width:100%;max-width:1560px;margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter)}
+.mono{font-family:var(--font-m);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.rule{height:1px;background:var(--line);width:100%}
+.acid{color:var(--acid)}
+.grid-lines{
+  position:fixed;inset:0;pointer-events:none;z-index:1;
+  background-image:linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:calc(100% / 6) 100%;
+  opacity:.42;
+}
+@media(max-width:900px){.grid-lines{background-size:50% 100%;opacity:.3}}
+
+/* ============================================================
+   SCROLL PROGRESS
+   ============================================================ */
+.progress{
+  position:fixed;top:0;left:0;height:2px;background:var(--acid);
+  width:0%;z-index:1200;transition:width .1s linear;
+}
+
+/* ============================================================
+   TOP BAR
+   ============================================================ */
+.topbar{
+  position:relative;z-index:60;border-bottom:1px solid var(--line);
+  background:var(--bg);
+}
+.topbar-in{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:24px;padding:11px 0;
+}
+.topbar .mono{color:var(--ink-mute)}
+.topbar .live{display:inline-flex;align-items:center;gap:9px;color:var(--ink-soft)}
+.pulse{
+  width:7px;height:7px;border-radius:50%;background:var(--acid);
+  box-shadow:0 0 0 0 rgba(204,255,0,.6);animation:pulse 2.2s infinite;
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(204,255,0,.55)}
+  70%{box-shadow:0 0 0 9px rgba(204,255,0,0)}
+  100%{box-shadow:0 0 0 0 rgba(204,255,0,0)}
+}
+.topbar-right{display:flex;gap:26px;align-items:center}
+@media(max-width:760px){.topbar-right .hide-s{display:none}}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav{
+  position:sticky;top:0;z-index:900;
+  background:rgba(11,11,12,.82);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--line);
+}
+.nav-in{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:32px;padding:16px 0;
+}
+.brand{display:flex;align-items:baseline;gap:12px;flex-shrink:0}
+.brand-mark{
+  font-family:var(--font-h);font-weight:700;font-size:1.05rem;
+  letter-spacing:-.02em;
+  background:var(--acid);color:#000;
+  padding:5px 8px;line-height:1;
+}
+.brand-name{
+  font-family:var(--font-h);font-weight:500;font-size:1rem;letter-spacing:-.01em;
+}
+.brand-name span{color:var(--ink-mute)}
+@media(max-width:520px){.brand-name{display:none}}
+
+.nav-links{display:flex;align-items:center;gap:30px}
+.nav-links a{
+  font-family:var(--font-m);font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-soft);transition:color .25s;position:relative;padding:4px 0;
+}
+.nav-links a::after{
+  content:'';position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--acid);
+  transition:width .4s var(--ease);
+}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{width:100%}
+
+.nav-actions{display:flex;align-items:center;gap:20px}
+.nav-tel{
+  font-family:var(--font-m);font-size:.76rem;letter-spacing:.06em;color:var(--ink-soft);
+  transition:color .25s;
+}
+.nav-tel:hover{color:var(--acid)}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:11px;
+  padding:14px 24px;border:1px solid var(--acid);background:var(--acid);color:#000;
+  font-family:var(--font-m);font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;font-weight:500;
+  cursor:pointer;transition:all .3s var(--ease);white-space:nowrap;border-radius:0;
+}
+.btn:hover{background:transparent;color:var(--acid);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line-strong)}
+.btn-ghost:hover{border-color:var(--acid);color:var(--acid);background:transparent}
+.btn-dark{background:#000;color:var(--acid);border-color:#000}
+.btn-dark:hover{background:transparent;color:#000;border-color:#000}
+.btn-block{width:100%}
+.btn-lg{padding:18px 32px}
+
+.burger{
+  display:none;width:44px;height:44px;border:1px solid var(--line-strong);
+  background:transparent;cursor:pointer;position:relative;
+}
+.burger i{
+  position:absolute;left:12px;width:20px;height:1.5px;background:var(--ink);
+  transition:.35s var(--ease);
+}
+.burger i:nth-child(1){top:16px}
+.burger i:nth-child(2){top:21.5px}
+.burger i:nth-child(3){top:27px}
+.burger.on i:nth-child(1){transform:translateY(5.5px) rotate(45deg);background:var(--acid)}
+.burger.on i:nth-child(2){opacity:0}
+.burger.on i:nth-child(3){transform:translateY(-5.5px) rotate(-45deg);background:var(--acid)}
+
+@media(max-width:1080px){
+  .nav-links,.nav-tel{display:none}
+  .burger{display:block}
+}
+
+/* ============================================================
+   MOBILE DRAWER
+   ============================================================ */
+.drawer{
+  position:fixed;inset:0;z-index:880;background:var(--bg);
+  padding:110px var(--gutter) 40px;display:flex;flex-direction:column;
+  transform:translateX(100%);transition:transform .55s var(--ease);
+  overflow-y:auto;border-left:1px solid var(--line);
+}
+.drawer.open{transform:translateX(0)}
+.drawer a.d-link{
+  font-family:var(--font-h);font-size:clamp(1.6rem,7vw,2.4rem);font-weight:500;
+  letter-spacing:-.02em;padding:16px 0;border-bottom:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.drawer a.d-link span{font-family:var(--font-m);font-size:.68rem;color:var(--ink-mute)}
+.drawer a.d-link:hover{color:var(--acid)}
+.drawer .d-foot{margin-top:auto;padding-top:34px;display:flex;flex-direction:column;gap:10px}
+.drawer .d-foot .mono{color:var(--ink-mute)}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  position:relative;z-index:2;
+  border-bottom:1px solid var(--line);
+}
+.hero-grid{
+  display:grid;grid-template-columns:1fr 360px;
+  min-height:calc(100vh - 118px);
+}
+.hero-main{
+  padding:clamp(48px,7vw,90px) clamp(24px,4vw,64px) clamp(40px,5vw,64px) 0;
+  display:flex;flex-direction:column;justify-content:space-between;gap:56px;
+}
+.hero-eyebrow{display:flex;align-items:center;gap:16px;margin-bottom:34px;flex-wrap:wrap}
+.hero-eyebrow .tag{
+  font-family:var(--font-m);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+  border:1px solid var(--line-strong);padding:7px 12px;color:var(--ink-soft);
+}
+.hero-eyebrow .tag.a{border-color:var(--acid);color:var(--acid)}
+
+h1{
+  font-family:var(--font-h);font-weight:600;
+  font-size:clamp(2.6rem,7.4vw,6.2rem);
+  line-height:.98;letter-spacing:-.035em;
+  max-width:16ch;
+}
+h1 em{font-style:normal;color:var(--acid);display:inline-block}
+h1 .out{
+  -webkit-text-stroke:1.4px var(--ink);
+  color:transparent;
+}
+.hero-sub{
+  margin-top:32px;max-width:52ch;
+  font-size:clamp(.98rem,1.3vw,1.12rem);color:var(--ink-soft);font-weight:300;line-height:1.72;
+}
+.hero-sub b{color:var(--ink);font-weight:500}
+
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:40px}
+
+.hero-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--line);
+}
+.stat{
+  padding:26px 24px 0 0;
+  border-right:1px solid var(--line);
+}
+.stat:last-child{border-right:none;padding-right:0}
+.stat b{
+  display:block;font-family:var(--font-h);font-weight:600;
+  font-size:clamp(1.7rem,3.2vw,2.6rem);line-height:1;letter-spacing:-.03em;
+  margin-bottom:8px;
+}
+.stat b .u{font-size:.55em;color:var(--acid);margin-left:2px}
+.stat span{font-family:var(--font-m);font-size:.66rem;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-mute);display:block;line-height:1.5}
+
+/* Hero aside */
+.hero-aside{
+  border-left:1px solid var(--line);
+  display:flex;flex-direction:column;
+}
+.hero-photo{
+  position:relative;flex:1 1 auto;min-height:340px;overflow:hidden;
+  background:var(--surface-2);
+}
+.hero-photo img{
+  width:100%;height:100%;object-fit:cover;
+  filter:grayscale(1) contrast(1.12) brightness(.82);
+  transition:filter .6s var(--ease), transform 1.2s var(--ease);
+}
+.hero-photo:hover img{filter:grayscale(.15) contrast(1.05) brightness(.95);transform:scale(1.03)}
+.hero-photo::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(11,11,12,.15) 0%,rgba(11,11,12,.55) 100%);
+  pointer-events:none;
+}
+.hero-photo-label{
+  position:absolute;left:20px;bottom:20px;right:20px;z-index:2;
+}
+.hero-photo-label .mono{color:var(--acid);display:block;margin-bottom:6px}
+.hero-photo-label b{font-family:var(--font-h);font-size:1.1rem;font-weight:500;display:block}
+.hero-photo-label small{color:var(--ink-soft);font-size:.8rem}
+
+.hero-aside-foot{
+  border-top:1px solid var(--line);
+  padding:22px 24px;display:grid;gap:14px;
+}
+.aside-row{display:flex;justify-content:space-between;gap:14px;align-items:baseline}
+.aside-row .mono{color:var(--ink-mute)}
+.aside-row b{font-family:var(--font-m);font-size:.76rem;font-weight:500;color:var(--ink);letter-spacing:.02em}
+
+@media(max-width:1080px){
+  .hero-grid{grid-template-columns:1fr;min-height:auto}
+  .hero-main{padding-right:0}
+  .hero-aside{border-left:none;border-top:1px solid var(--line)}
+  .hero-photo{min-height:300px;max-height:380px}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+  .stat{padding:22px 20px 0 0}
+  .stat:nth-child(2){border-right:none}
+  .stat:nth-child(1),.stat:nth-child(2){margin-bottom:24px}
+}
+@media(max-width:520px){
+  h1{font-size:clamp(2.1rem,10.5vw,3rem)}
+  .hero-cta .btn{width:100%}
+}
+
+/* ============================================================
+   TICKER
+   ============================================================ */
+.ticker{
+  background:var(--acid);color:#000;overflow:hidden;
+  border-top:1px solid var(--acid);border-bottom:1px solid var(--acid);
+  position:relative;z-index:2;
+}
+.ticker-track{
+  display:flex;width:max-content;animation:marquee 34s linear infinite;
+}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.ticker-set{display:flex;align-items:center;gap:0;flex-shrink:0}
+.ticker-item{
+  font-family:var(--font-m);font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;
+  padding:13px 26px;white-space:nowrap;font-weight:500;
+}
+.ticker-item::after{content:'◆';margin-left:26px;font-size:.55rem;opacity:.5;vertical-align:middle}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ============================================================
+   SECTION SHELL
+   ============================================================ */
+.section{
+  position:relative;z-index:2;
+  padding:clamp(64px,9vw,124px) 0;
+  border-bottom:1px solid var(--line);
+}
+.sec-head{
+  display:grid;grid-template-columns:230px 1fr;gap:40px;
+  margin-bottom:clamp(40px,5vw,72px);align-items:start;
+}
+.sec-head .idx{
+  font-family:var(--font-m);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-mute);padding-top:9px;display:flex;align-items:center;gap:10px;
+}
+.sec-head .idx::before{content:'';width:22px;height:1px;background:var(--acid)}
+.sec-head h2{
+  font-family:var(--font-h);font-weight:600;
+  font-size:clamp(1.9rem,4.4vw,3.5rem);
+  line-height:1.04;letter-spacing:-.03em;max-width:20ch;
+}
+.sec-head h2 .accent{color:var(--acid)}
+.sec-head p{
+  margin-top:20px;color:var(--ink-soft);font-weight:300;
+  max-width:56ch;font-size:clamp(.96rem,1.15vw,1.05rem);
+}
+@media(max-width:900px){
+  .sec-head{grid-template-columns:1fr;gap:20px}
+}
+
+/* ============================================================
+   PROBLEMS (what clients face)
+   ============================================================ */
+.problems{background:var(--surface)}
+.prob-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:1px;background:var(--line);border:1px solid var(--line);
+}
+.prob{
+  background:var(--bg);padding:34px 30px 30px;position:relative;
+  transition:background .4s var(--ease);min-height:220px;
+  display:flex;flex-direction:column;gap:14px;
+}
+.prob:hover{background:var(--surface-2)}
+.prob .n{
+  font-family:var(--font-m);font-size:.7rem;letter-spacing:.14em;color:var(--acid);
+}
+.prob h3{
+  font-family:var(--font-h);font-weight:500;font-size:1.18rem;
+  letter-spacing:-.02em;line-height:1.25;
+}
+.prob p{font-size:.88rem;color:var(--ink-soft);font-weight:300;margin-top:auto}
+
+/* ============================================================
+   SERVICES (numbered rows)
+   ============================================================ */
+.svc-list{border-top:1px solid var(--line)}
+.svc{
+  border-bottom:1px solid var(--line);
+  padding:clamp(26px,3.4vw,40px) 0;
+  display:grid;grid-template-columns:70px minmax(0,1.05fr) minmax(0,1.35fr) auto;
+  gap:32px;align-items:start;
+  transition:background .4s var(--ease), padding-left .4s var(--ease);
+  position:relative;
+}
+.svc:hover{background:var(--surface);padding-left:22px}
+.svc::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--acid);
+  transform:scaleY(0);transform-origin:top;transition:transform .45s var(--ease);
+}
+.svc:hover::before{transform:scaleY(1)}
+.svc .num{
+  font-family:var(--font-m);font-size:.78rem;letter-spacing:.1em;color:var(--ink-mute);
+  padding-top:5px;transition:color .3s;
+}
+.svc:hover .num{color:var(--acid)}
+.svc h3{
+  font-family:var(--font-h);font-weight:500;font-size:clamp(1.15rem,2vw,1.55rem);
+  letter-spacing:-.025em;line-height:1.2;margin-bottom:10px;
+}
+.svc .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.svc .tags i{
+  font-style:normal;font-family:var(--font-m);font-size:.62rem;letter-spacing:.1em;
+  text-transform:uppercase;border:1px solid var(--line-strong);padding:4px 9px;color:var(--ink-mute);
+}
+.svc p{font-size:.9rem;color:var(--ink-soft);font-weight:300;line-height:1.65}
+.svc .price{
+  text-align:right;white-space:nowrap;padding-top:4px;
+}
+.svc .price b{
+  display:block;font-family:var(--font-h);font-weight:600;
+  font-size:clamp(1.05rem,1.6vw,1.35rem);letter-spacing:-.02em;
+}
+.svc .price span{font-family:var(--font-m);font-size:.62rem;letter-spacing:.1em;color:var(--ink-mute);text-transform:uppercase}
+@media(max-width:1000px){
+  .svc{grid-template-columns:44px 1fr auto;gap:18px}
+  .svc p{grid-column:2 / -1;margin-top:4px}
+}
+@media(max-width:560px){
+  .svc{grid-template-columns:36px 1fr;gap:14px}
+  .svc .price{grid-column:2;text-align:left;padding-top:12px}
+}
+
+.svc-note{
+  margin-top:34px;display:flex;flex-wrap:wrap;gap:22px;align-items:center;justify-content:space-between;
+  padding:24px 0 0;border-top:1px solid var(--line);
+}
+.svc-note p{color:var(--ink-soft);font-size:.9rem;max-width:60ch;font-weight:300}
+
+/* ============================================================
+   CASES
+   ============================================================ */
+.cases{background:var(--surface)}
+.case-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:1px;background:var(--line);border:1px solid var(--line);
+}
+.case{
+  background:var(--bg);padding:clamp(28px,3.4vw,44px) clamp(24px,3vw,38px);
+  display:flex;flex-direction:column;gap:20px;position:relative;overflow:hidden;
+  transition:background .45s var(--ease);
+}
+.case:hover{background:var(--surface-2)}
+.case-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.case .sector{font-family:var(--font-m);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute)}
+.case .metric{
+  font-family:var(--font-h);font-weight:700;letter-spacing:-.045em;
+  font-size:clamp(2.6rem,5.4vw,4.4rem);line-height:.92;color:var(--acid);
+}
+.case .metric small{font-size:.36em;font-weight:500;color:var(--acid);letter-spacing:0;margin-left:2px}
+.case h3{
+  font-family:var(--font-h);font-weight:500;font-size:1.08rem;letter-spacing:-.02em;
+  line-height:1.3;
+}
+.case p{font-size:.86rem;color:var(--ink-soft);font-weight:300;line-height:1.65;margin-top:auto}
+.case .bars{display:flex;gap:4px;align-items:flex-end;height:34px;margin-top:6px}
+.case .bars i{flex:1;background:var(--line-strong);display:block;transition:background .5s var(--ease)}
+.case:hover .bars i{background:var(--acid);opacity:.85}
+.case .bars i:nth-child(1){height:22%}
+.case .bars i:nth-child(2){height:38%}
+.case .bars i:nth-child(3){height:30%}
+.case .bars i:nth-child(4){height:56%}
+.case .bars i:nth-child(5){height:72%}
+.case .bars i:nth-child(6){height:100%}
+
+/* ============================================================
+   PROCESS
+   ============================================================ */
+.proc-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--line);border-left:1px solid var(--line);
+}
+.proc{
+  border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:clamp(26px,3vw,40px) clamp(20px,2.4vw,32px);
+  display:flex;flex-direction:column;gap:16px;min-height:260px;
+  transition:background .45s var(--ease);position:relative;
+}
+.proc:hover{background:var(--surface)}
+.proc .pnum{
+  font-family:var(--font-m);font-size:.7rem;letter-spacing:.14em;color:var(--acid);
+}
+.proc h3{
+  font-family:var(--font-h);font-weight:500;font-size:1.14rem;letter-spacing:-.02em;line-height:1.28;
+}
+.proc p{font-size:.85rem;color:var(--ink-soft);font-weight:300;line-height:1.65;margin-top:auto}
+.proc .dur{
+  font-family:var(--font-m);font-size:.62rem;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--ink-mute);border-top:1px solid var(--line);padding-top:12px;margin-top:12px;
+}
+@media(max-width:1000px){.proc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.proc-grid{grid-template-columns:1fr}.proc{min-height:auto}}
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.quotes{background:var(--surface)}
+.quote-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:1px;background:var(--line);border:1px solid var(--line);
+}
+.q{
+  background:var(--bg);padding:clamp(28px,3.4vw,44px) clamp(24px,3vw,38px);
+  display:flex;flex-direction:column;gap:22px;
+}
+.q .qm{
+  font-family:var(--font-h);font-size:3.2rem;line-height:.5;color:var(--acid);opacity:.7;height:22px;
+}
+.q p{font-size:.95rem;color:var(--ink-soft);font-weight:300;line-height:1.72;flex:1}
+.q p b{color:var(--ink);font-weight:500}
+.q-author{display:flex;gap:14px;align-items:center;padding-top:20px;border-top:1px solid var(--line)}
+.q-av{
+  width:44px;height:44px;flex-shrink:0;display:grid;place-items:center;
+  background:var(--acid);color:#000;font-family:var(--font-h);font-weight:600;font-size:1rem;
+}
+.q-author b{display:block;font-size:.9rem;font-weight:500}
+.q-author small{font-family:var(--font-m);font-size:.65rem;letter-spacing:.08em;color:var(--ink-mute);text-transform:uppercase}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq-list{border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-q{
+  width:100%;background:none;border:none;text-align:left;cursor:pointer;
+  padding:clamp(22px,2.6vw,32px) 0;
+  display:grid;grid-template-columns:56px 1fr 40px;gap:24px;align-items:center;
+  transition:padding-left .4s var(--ease);
+}
+.faq-q:hover{padding-left:14px}
+.faq-q .qn{font-family:var(--font-m);font-size:.72rem;color:var(--ink-mute);letter-spacing:.1em}
+.faq-q h3{
+  font-family:var(--font-h);font-weight:500;font-size:clamp(1rem,1.7vw,1.28rem);
+  letter-spacing:-.02em;line-height:1.3;transition:color .3s;
+}
+.faq-q:hover h3{color:var(--acid)}
+.faq-ic{
+  width:34px;height:34px;border:1px solid var(--line-strong);display:grid;place-items:center;
+  position:relative;justify-self:end;transition:.35s var(--ease);
+}
+.faq-ic::before,.faq-ic::after{
+  content:'';position:absolute;background:var(--ink);transition:.35s var(--ease);
+}
+.faq-ic::before{width:12px;height:1.5px}
+.faq-ic::after{width:1.5px;height:12px}
+.faq-item.open .faq-ic{background:var(--acid);border-color:var(--acid)}
+.faq-item.open .faq-ic::before,.faq-item.open .faq-ic::after{background:#000}
+.faq-item.open .faq-ic::after{transform:scaleY(0)}
+.faq-a{
+  overflow:hidden;max-height:0;transition:max-height .5s var(--ease);
+}
+.faq-a-in{
+  padding:0 0 30px 80px;max-width:78ch;
+  color:var(--ink-soft);font-size:.93rem;font-weight:300;line-height:1.75;
+}
+@media(max-width:640px){
+  .faq-q{grid-template-columns:34px 1fr 34px;gap:14px}
+  .faq-a-in{padding-left:48px}
+}
+
+/* ============================================================
+   CONTACT / FORM
+   ============================================================ */
+.contact-wrap{
+  display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(32px,4vw,64px);
+  align-items:start;
+}
+.contact-info{display:flex;flex-direction:column;gap:0}
+.ci{
+  display:grid;grid-template-columns:44px 1fr;gap:18px;
+  padding:22px 0;border-bottom:1px solid var(--line);align-items:start;
+}
+.ci:first-child{border-top:1px solid var(--line)}
+.ci .ic{
+  width:44px;height:44px;border:1px solid var(--line-strong);display:grid;place-items:center;
+  color:var(--acid);transition:.35s var(--ease);
+}
+.ci:hover .ic{background:var(--acid);color:#000;border-color:var(--acid)}
+.ci .mono{display:block;margin-bottom:6px;color:var(--ink-mute)}
+.ci b{font-weight:500;font-size:1rem;line-height:1.5;display:block}
+.ci a:hover{color:var(--acid)}
+
+.map-box{
+  margin-top:30px;border:1px solid var(--line);overflow:hidden;height:300px;
+  position:relative;background:var(--surface);
+}
+.map-box iframe{width:100%;height:100%;border:0;display:block;filter:grayscale(.55) contrast(1.05) brightness(.9)}
+.map-box::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  box-shadow:inset 0 0 90px rgba(0,0,0,.5);z-index:2;
+}
+
+/* FORM — terminal style */
+.form{
+  border:1px solid var(--line-strong);background:var(--surface);
+  position:relative;
+}
+.form-head{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 20px;border-bottom:1px solid var(--line);
+  background:var(--surface-2);
+}
+.form-head .dots{display:flex;gap:6px}
+.form-head .dots i{width:9px;height:9px;border-radius:50%;background:var(--line-strong);display:block}
+.form-head .dots i:first-child{background:var(--acid)}
+.form-head .mono{color:var(--ink-mute);margin-left:6px}
+.form-body{padding:clamp(24px,3vw,36px)}
+
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:560px){.f-row{grid-template-columns:1fr}}
+.f-field{margin-bottom:18px;position:relative}
+.f-field label{
+  display:block;font-family:var(--font-m);font-size:.63rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-mute);margin-bottom:8px;
+}
+.f-field input,.f-field select,.f-field textarea{
+  width:100%;padding:14px 15px;background:var(--bg);
+  border:1px solid var(--line);border-radius:0;outline:none;
+  font-size:.92rem;transition:border-color .25s, background .25s;
+}
+.f-field textarea{resize:vertical;min-height:96px;line-height:1.6}
+.f-field input::placeholder,.f-field textarea::placeholder{color:var(--ink-mute)}
+.f-field input:focus,.f-field select:focus,.f-field textarea:focus{
+  border-color:var(--acid);background:var(--surface-2);
+}
+.f-field input.err,.f-field select.err{border-color:#FF5B4A}
+.f-field select{
+  appearance:none;cursor:pointer;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239A9A97' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;padding-right:42px;
+}
+.f-check{display:flex;gap:12px;align-items:flex-start;margin:24px 0;cursor:pointer}
+.f-check input{width:18px;height:18px;flex-shrink:0;margin-top:3px;accent-color:var(--acid);cursor:pointer}
+.f-check span{font-size:.76rem;color:var(--ink-mute);line-height:1.6}
+.f-note{
+  font-family:var(--font-m);font-size:.62rem;letter-spacing:.1em;color:var(--ink-mute);
+  text-align:center;margin-top:14px;text-transform:uppercase;
+}
+.f-success{display:none;padding:34px 8px;text-align:center}
+.f-success.show{display:block;animation:fadeUp .5s var(--ease)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.f-success .ok{
+  width:62px;height:62px;background:var(--acid);color:#000;
+  display:grid;place-items:center;margin:0 auto 22px;
+}
+.f-success h3{font-family:var(--font-h);font-size:1.5rem;font-weight:600;letter-spacing:-.02em;margin-bottom:12px}
+.f-success p{color:var(--ink-soft);font-size:.9rem;font-weight:300;max-width:42ch;margin:0 auto}
+
+@media(max-width:1000px){.contact-wrap{grid-template-columns:1fr}}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer{
+  background:#000;color:var(--ink-soft);position:relative;z-index:2;
+  padding:clamp(56px,7vw,90px) 0 0;
+}
+.foot-grid{
+  display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;
+  padding-bottom:clamp(40px,5vw,64px);
+}
+.foot-brand .brand{margin-bottom:20px}
+.foot-brand p{font-size:.85rem;font-weight:300;max-width:32ch;line-height:1.7}
+.foot h4{
+  font-family:var(--font-m);font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink-mute);margin-bottom:20px;font-weight:400;
+}
+.foot ul{list-style:none;display:grid;gap:11px}
+.foot ul a{font-size:.87rem;transition:color .25s}
+.foot ul a:hover{color:var(--acid)}
+.foot-bottom{
+  border-top:1px solid var(--line);padding:24px 0;
+  display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  font-family:var(--font-m);font-size:.66rem;letter-spacing:.08em;color:var(--ink-mute);
+  text-transform:uppercase;
+}
+@media(max-width:900px){.foot-grid{grid-template-columns:1fr 1fr;gap:32px}}
+@media(max-width:560px){.foot-grid{grid-template-columns:1fr}}
+
+/* ============================================================
+   FLOATING CTA
+   ============================================================ */
+.fab{
+  position:fixed;right:20px;bottom:20px;z-index:800;display:flex;flex-direction:column;gap:10px;
+}
+.fab a{
+  width:50px;height:50px;display:grid;place-items:center;
+  background:var(--surface);border:1px solid var(--line-strong);color:var(--ink);
+  transition:.35s var(--ease);
+}
+.fab a:hover{background:var(--acid);color:#000;border-color:var(--acid);transform:translateY(-3px)}
+.fab a.tg:hover{background:#2AABEE;border-color:#2AABEE;color:#fff}
+.fab a.wa:hover{background:#25D366;border-color:#25D366;color:#fff}
+
+/* ============================================================
+   REVEAL ANIMATION
+   ============================================================ */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease), transform .9s var(--ease)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  .ticker-track{animation:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<div class="grid-lines"></div>
+
+<!-- ============================ TOPBAR ============================ -->
+<div class="topbar">
+  <div class="wrap topbar-in">
+    <span class="mono live"><i class="pulse"></i> Свободно 2 окна на консультации в ноябре</span>
+    <div class="topbar-right">
+      <span class="mono hide-s">Санкт-Петербург · Невский проспект</span>
+      <span class="mono hide-s">Пн–Пт 10:00–20:00</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ NAV ============================ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a href="#" class="brand">
+      <span class="brand-mark">МО</span>
+      <span class="brand-name">Максим Орлов <span>/ консалтинг</span></span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="#problems">Задачи</a>
+      <a href="#services">Услуги</a>
+      <a href="#cases">Кейсы</a>
+      <a href="#process">Процесс</a>
+      <a href="#faq">Вопросы</a>
+      <a href="#contact">Контакты</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="tel:+78121234567" class="nav-tel">+7 (812) 123-45-67</a>
+      <a href="#contact" class="btn">Аудит бизнеса</a>
+      <button class="burger" id="burger" aria-label="Меню"><i></i><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+
+<!-- ============================ DRAWER ============================ -->
+<div class="drawer" id="drawer">
+  <a class="d-link" href="#problems">Задачи <span>01</span></a>
+  <a class="d-link" href="#services">Услуги <span>02</span></a>
+  <a class="d-link" href="#cases">Кейсы <span>03</span></a>
+  <a class="d-link" href="#process">Процесс <span>04</span></a>
+  <a class="d-link" href="#faq">Вопросы <span>05</span></a>
+  <a class="d-link" href="#contact">Контакты <span>06</span></a>
+  <div class="d-foot">
+    <a href="#contact" class="btn btn-block btn-lg">Записаться на аудит</a>
+    <span class="mono">+7 (812) 123-45-67</span>
+    <span class="mono">hello@orlov-consult.ru</span>
+    <span class="mono">Санкт-Петербург, Невский пр., 68</span>
+  </div>
+</div>
+
+<!-- ============================ HERO ============================ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-main">
+        <div>
+          <div class="hero-eyebrow rv">
+            <span class="tag a">Бизнес-консультант</span>
+            <span class="tag">Санкт-Петербург</span>
+            <span class="tag">11 лет практики</span>
+          </div>
+
+          <h1 class="rv">
+            Рост, который <em>можно</em> <span class="out">посчитать</span>
+          </h1>
+
+          <p class="hero-sub rv">
+            Помогаю собственникам и CEO выйти из операционного хаоса в управляемую систему.
+            Стратегия, юнит-экономика, операционная эффективность и управленческая команда.
+            <b>Работаю с цифрами, а не с лозунгами.</b>
+          </p>
+
+          <div class="hero-cta rv">
+            <a href="#contact" class="btn btn-lg">Бесплатный аудит 45 минут</a>
+            <a href="#cases" class="btn btn-ghost btn-lg">Смотреть кейсы</a>
+          </div>
+        </div>
+
+        <div class="hero-stats rv">
+          <div class="stat">
+            <b>11<span class="u">лет</span></b>
+            <span>в консалтинге<br>и управлении</span>
+          </div>
+          <div class="stat">
+            <b>68<span class="u">+</span></b>
+            <span>проектов<br>с 2013 года</span>
+          </div>
+          <div class="stat">
+            <b>4.2<span class="u">млрд ₽</span></b>
+            <span>суммарная выручка<br>клиентов</span>
+          </div>
+          <div class="stat">
+            <b>3.4<span class="u">×</span></b>
+            <span>средний рост<br>за 18 месяцев</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-aside">
+        <div class="hero-photo">
+          <img src="foto.jpg"
+               alt="Максим Орлов, бизнес-консультант" loading="eager"
+               onerror="this.style.display='none'">
+          <div class="hero-photo-label">
+            <span class="mono">Консультант</span>
+            <b>Максим Орлов</b>
+            <small>Ex-COO в производстве и ритейле</small>
+          </div>
+        </div>
+        <div class="hero-aside-foot">
+          <div class="aside-row">
+            <span class="mono">Опыт в найме</span>
+            <b>7 лет COO / CFO</b>
+          </div>
+          <div class="aside-row">
+            <span class="mono">Средний чек проекта</span>
+            <b>от 180 000 ₽</b>
+          </div>
+          <div class="aside-row">
+            <span class="mono">Формат</span>
+            <b>Очно / онлайн</b>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ TICKER ============================ -->
+<div class="ticker">
+  <div class="ticker-track" id="tickerTrack">
+    <div class="ticker-set">
+      <span class="ticker-item">Стратегия роста</span>
+      <span class="ticker-item">Юнит-экономика</span>
+      <span class="ticker-item">Операционная эффективность</span>
+      <span class="ticker-item">Управленческий учёт</span>
+      <span class="ticker-item">Финансовое моделирование</span>
+      <span class="ticker-item">Построение команды</span>
+      <span class="ticker-item">Регламенты и процессы</span>
+      <span class="ticker-item">Выход на маркетплейсы</span>
+      <span class="ticker-item">Масштабирование</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================ PROBLEMS ============================ -->
+<section class="section problems" id="problems">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="idx">01 / Задачи</div>
+      <div>
+        <h2>С чем приходят <span class="accent">собственники</span></h2>
+        <p>Если хотя бы один пункт про вас — мы найдём решение. Обычно проблема не там, где кажется.</p>
+      </div>
+    </div>
+
+    <div class="prob-grid rv">
+      <div class="prob">
+        <span class="n">01</span>
+        <h3>Выручка растёт, а прибыль — нет</h3>
+        <p>Оборот увеличивается, но деньги «испаряются». Разбираем юнит-экономику и находим утечки.</p>
+      </div>
+      <div class="prob">
+        <span class="n">02</span>
+        <h3>Всё держится на мне</h3>
+        <p>Бизнес не работает без собственника. Строим управленческую структуру и делегирование.</p>
+      </div>
+      <div class="prob">
+        <span class="n">03</span>
+        <h3>Нет прозрачных цифр</h3>
+        <p>Решения принимаются «на ощупь». Внедряем управленческий учёт и dashboard.</p>
+      </div>
+      <div class="prob">
+        <span class="n">04</span>
+        <h3>Команда не тянет</h3>
+        <p>Топы не берут ответственность. Настраиваем роли, KPI и систему мотивации.</p>
+      </div>
+      <div class="prob">
+        <span class="n">05</span>
+        <h3>Хаос в процессах</h3>
+        <p>Каждый делает по-своему, качество плавает. Формализуем ключевые процессы и регламенты.</p>
+      </div>
+      <div class="prob">
+        <span class="n">06</span>
+        <h3>Не понимаю, куда расти</h3>
+        <p>Есть несколько идей, но нет приоритетов. Собираем стратегию на 12–18 месяцев с цифрами.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SERVICES ============================ -->
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="idx">02 / Услуги</div>
+      <div>
+        <h2>Форматы работы</h2>
+        <p>Начинаем с диагностики, дальше — либо точечный проект, либо сопровождение на 3–12 месяцев.</p>
+      </div>
+    </div>
+
+    <div class="svc-list rv">
+      <article class="svc">
+        <div class="num">01</div>
+        <div>
+          <h3>Аудит бизнеса</h3>
+          <div class="tags"><i>Диагностика</i><i>Отчёт</i><i>План</i></div>
+        </div>
+        <p>Глубокий разбор компании: финансы, операции, команда, маркетинг. На выходе — карта проблем, точки роста и приоритизированный план действий на 90 дней.</p>
+        <div class="price"><b>от 60 000 ₽</b><span>10–14 дней</span></div>
+      </article>
+
+      <article class="svc">
+        <div class="num">02</div>
+        <div>
+          <h3>Стратегическая сессия</h3>
+          <div class="tags"><i>Стратегия</i><i>Команда</i><i>1 день</i></div>
+        </div>
+        <p>Однодневная работа с собственником и топ-командой: формулируем цели, выбираем приоритеты, разбираем ресурсы и риски. Выход — согласованная стратегия и roadmap.</p>
+        <div class="price"><b>от 120 000 ₽</b><span>1 день</span></div>
+      </article>
+
+      <article class="svc">
+        <div class="num">03</div>
+        <div>
+          <h3>Финансовая модель и юнит-экономика</h3>
+          <div class="tags"><i>Финансы</i><i>Excel</i><i>Прогноз</i></div>
+        </div>
+        <p>Строим рабочую финмодель: P&amp;L, Cash Flow, юнит-экономика по направлениям. Вы начинаете видеть, где зарабатываете, а где теряете деньги.</p>
+        <div class="price"><b>от 180 000 ₽</b><span>3–5 недель</span></div>
+      </article>
+
+      <article class="svc">
+        <div class="num">04</div>
+        <div>
+          <h3>Операционная эффективность</h3>
+          <div class="tags"><i>Процессы</i><i>Регламенты</i><i>KPI</i></div>
+        </div>
+        <p>Описываем и оптимизируем ключевые процессы, внедряем регламенты, KPI и систему контроля. Снимаем с собственника операционку.</p>
+        <div class="price"><b>от 200 000 ₽</b><span>1–3 мес</span></div>
+      </article>
+
+      <article class="svc">
+        <div class="num">05</div>
+        <div>
+          <h3>Сопровождение собственника</h3>
+          <div class="tags"><i>12 недель</i><i>Еженедельно</i><i>Разбор</i></div>
+        </div>
+        <p>Регулярные встречи раз в неделю: разбираем текущие решения, помогаю держать фокус, быть «внешним мозгом» и точкой опоры для собственника.</p>
+        <div class="price"><b>от 90 000 ₽</b><span>в месяц</span></div>
+      </article>
+
+      <article class="svc">
+        <div class="num">06</div>
+        <div>
+          <h3>Внедрение управленческого учёта</h3>
+          <div class="tags"><i>Учёт</i><i>Dashboard</i><i>Отчётность</i></div>
+        </div>
+        <p>Настраиваем регулярную управленческую отчётность: от первичных данных до dashboard для собственника. Цифры — в одном месте, в срок, без ручного сбора.</p>
+        <div class="price"><b>от 150 000 ₽</b><span>4–6 недель</span></div>
+      </article>
+    </div>
+
+    <div class="svc-note rv">
+      <p>Не уверены, какой формат подходит? Начните с бесплатного 45-минутного аудита — разберём вашу ситуацию и подскажу, с чего начать.</p>
+      <a href="#contact" class="btn btn-ghost">Записаться на аудит</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CASES ============================ -->
+<section class="section cases" id="cases">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="idx">03 / Кейсы</div>
+      <div>
+        <h2>Результаты <span class="accent">в цифрах</span></h2>
+        <p>Ниже — четыре проекта за последние три года. Названия компаний скрыты по NDA, детали расскажу на созвоне.</p>
+      </div>
+    </div>
+
+    <div class="case-grid rv">
+      <article class="case">
+        <div class="case-top">
+          <span class="sector">Производство · СПб</span>
+          <div class="bars"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="metric">+38<small>%</small></div>
+        <h3>Маржинальность выросла с 19% до 26%</h3>
+        <p>Пересобрали юнит-экономику, отказались от двух убыточных линеек и пересмотрели ценообразование. Срок — 5 месяцев.</p>
+      </article>
+
+      <article class="case">
+        <div class="case-top">
+          <span class="sector">Ритейл · Москва</span>
+          <div class="bars"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="metric">3.1<small>×</small></div>
+        <h3>Выручка за 18 месяцев</h3>
+        <p>Открыли 9 новых точек без роста административных расходов. Внедрили управленческий учёт и еженедельный контроль по точкам.</p>
+      </article>
+
+      <article class="case">
+        <div class="case-top">
+          <span class="sector">Услуги B2B · СПб</span>
+          <div class="bars"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="metric">−41<small>%</small></div>
+        <h3>Снижение операционных издержек</h3>
+        <p>Оптимизировали процессы, автоматизировали отчётность, пересобрали оргструктуру. ФОТ сократился без потери темпа.</p>
+      </article>
+
+      <article class="case">
+        <div class="case-top">
+          <span class="sector">E-commerce · Россия</span>
+          <div class="bars"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="metric">14<small>→ 2</small></div>
+        <h3>Времени на операционку в неделю</h3>
+        <p>Собственник вышел из операционки: команда взяла на себя процессы, для него остались только стратегические решения и ключевые наймы.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PROCESS ============================ -->
+<section class="section" id="process">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="idx">04 / Процесс</div>
+      <div>
+        <h2>Как строится работа</h2>
+        <p>Прозрачный процесс без сюрпризов. Вы всегда знаете, на каком этапе мы находимся и что будет дальше.</p>
+      </div>
+    </div>
+
+    <div class="proc-grid rv">
+      <div class="proc">
+        <span class="pnum">ЭТАП 01</span>
+        <h3>Заявка и знакомство</h3>
+        <p>Оставляете заявку. Созваниваемся на 15 минут, чтобы понять задачу и подходит ли формат.</p>
+        <span class="dur">1–2 дня</span>
+      </div>
+      <div class="proc">
+        <span class="pnum">ЭТАП 02</span>
+        <h3>Диагностика</h3>
+        <p>Бесплатный аудит 45 минут: разбираем ситуацию, цифры и узкие места. Формулирую гипотезы.</p>
+        <span class="dur">45 минут</span>
+      </div>
+      <div class="proc">
+        <span class="pnum">ЭТАП 03</span>
+        <h3>Предложение и план</h3>
+        <p>Готовлю коммерческое предложение: формат, сроки, стоимость, измеримые результаты.</p>
+        <span class="dur">3–5 дней</span>
+      </div>
+      <div class="proc">
+        <span class="pnum">ЭТАП 04</span>
+        <h3>Работа и результат</h3>
+        <p>Реализуем проект по этапам. Еженедельные статусы, отчёты, корректировка плана по факту.</p>
+        <span class="dur">1–12 месяцев</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ TESTIMONIALS ============================ -->
+<section class="section quotes">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="idx">05 / Отзывы</div>
+      <div>
+        <h2>Что говорят клиенты</h2>
+        <p>Отзывы публикуются с согласия. Названия компаний не указываю — конфиденциальность важнее.</p>
+      </div>
+    </div>
+
+    <div class="quote-grid rv">
+      <article class="q">
+        <div class="qm">“</div>
+        <p>Пришли с выручкой 180 млн и нулевой прибылью. За полгода разобрали экономику, отказались от двух направлений и вышли на <b>чистую маржу 14%</b>. Максим не даёт «универсальных советов» — работает с нашими цифрами.</p>
+        <div class="q-author">
+          <div class="q-av">А</div>
+          <div>
+            <b>Андрей, собственник</b>
+            <small>Производство · СПб</small>
+          </div>
+        </div>
+      </article>
+
+      <article class="q">
+        <div class="qm">“</div>
+        <p>Я годами не мог выйти из операционки. За 4 месяца сопровождения команда взяла на себя процессы, а я <b>освободил 12 часов в неделю</b>. Впервые за пять лет был в отпуске без ноутбука.</p>
+        <div class="q-author">
+          <div class="q-av">Е</div>
+          <div>
+            <b>Елена, CEO</b>
+            <small>Услуги B2B · Москва</small>
+          </div>
+        </div>
+      </article>
+
+      <article class="q">
+        <div class="qm">“</div>
+        <p>Стратегическая сессия с командой — лучшие деньги, которые мы потратили за год. Вышли с <b>согласованным планом на 18 месяцев</b> и без внутренних конфликтов о приоритетах.</p>
+        <div class="q-author">
+          <div class="q-av">С</div>
+          <div>
+            <b>Сергей, сооснователь</b>
+            <small>E-commerce · Россия</small>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FAQ ============================ -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="idx">06 / Вопросы</div>
+      <div>
+        <h2>Частые вопросы</h2>
+      </div>
+    </div>
+
+    <div class="faq-list rv" id="faqList">
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          <span class="qn">01</span>
+          <h3>С каким бизнесом вы работаете?</h3>
+          <span class="faq-ic"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-in">
+          Основной фокус — компании с выручкой от 50 млн ₽ в год: производство, ритейл, услуги B2B, e-commerce. Работаю с собственниками и CEO. Если вы меньше — тоже можно, но важно понимать, что системные изменения требуют ресурса и времени.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          <span class="qn">02</span>
+          <h3>Сколько стоит работа и от чего зависит цена?</h3>
+          <span class="faq-ic"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-in">
+          Аудит — от 60 000 ₽. Стратегическая сессия — от 120 000 ₽. Проекты сопровождения — от 90 000 ₽ в месяц. Итоговая стоимость зависит от масштаба бизнеса, количества направлений и глубины погружения. Точную цифру называю после бесплатного аудита.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          <span class="qn">03</span>
+          <h3>Вы работаете только в Санкт-Петербурге?</h3>
+          <span class="faq-ic"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-in">
+          Очно — в Санкт-Петербурге, встречи провожу в офисе на Невском проспекте или на территории клиента. Онлайн — работаю со всей Россией и русскоязычными компаниями за рубежом. Формат онлайн ничем не отличается по результату, только без дороги.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          <span class="qn">04</span>
+          <h3>Что входит в бесплатный аудит?</h3>
+          <span class="faq-ic"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-in">
+          45 минут разговора. Вы рассказываете о ситуации, я задаю вопросы по цифрам и процессам. В конце — короткий разбор: вижу ли я точки роста, с чего стоит начать и какой формат работы подойдёт. Даже если мы не начнём работать, вы уйдёте с конкретными гипотезами.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          <span class="qn">05</span>
+          <h3>Есть ли гарантии результата?</h3>
+          <span class="faq-ic"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-in">
+          Гарантирую качество процесса и свою вовлечённость — фиксируем это в договоре. Что касается цифр: результат зависит от решений собственника и команды. Поэтому на старте мы формулируем измеримые цели и точки контроля, чтобы обе стороны видели прогресс.
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" type="button">
+          <span class="qn">06</span>
+          <h3>Как быстро можно начать?</h3>
+          <span class="faq-ic"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-in">
+          Обычно — в течение 5–7 дней с момента заявки: знакомство, аудит, предложение. Если у вас срочная задача — напишите, посмотрю, что можно сделать быстрее.
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CONTACT ============================ -->
+<section class="section" id="contact" style="border-bottom:none">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="idx">07 / Контакты</div>
+      <div>
+        <h2>Записаться на <span class="accent">бесплатный аудит</span></h2>
+        <p>45 минут разговора, разбор вашей ситуации и конкретные гипотезы — без обязательств.</p>
+      </div>
+    </div>
+
+    <div class="contact-wrap">
+      <!-- left: contacts + map -->
+      <div class="contact-info rv">
+        <div class="ci">
+          <div class="ic">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.8.6 2.6a2 2 0 01-.5 2.1L8.1 9.5a16 16 0 006 6l1.1-1.1a2 2 0 012.1-.5c.8.3 1.7.5 2.6.6a2 2 0 011.7 2z"/></svg>
+          </div>
+          <div>
+            <span class="mono">Телефон</span>
+            <b><a href="tel:+78121234567">+7 (812) 123-45-67</a></b>
+          </div>
+        </div>
+
+        <div class="ci">
+          <div class="ic">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16"/><path d="M2 7l10 6 10-6"/></svg>
+          </div>
+          <div>
+            <span class="mono">E-mail</span>
+            <b><a href="mailto:hello@orlov-consult.ru">hello@orlov-consult.ru</a></b>
+          </div>
+        </div>
+
+        <div class="ci">
+          <div class="ic">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <span class="mono">Офис в Санкт-Петербурге</span>
+            <b>Невский проспект, 68, офис 412<br>м. Маяковская / Площадь Восстания, 4 мин</b>
+          </div>
+        </div>
+
+        <div class="ci">
+          <div class="ic">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </div>
+          <div>
+            <span class="mono">График</span>
+            <b>Пн–Пт: 10:00 – 20:00<br>Сб: по договорённости · Вс — выходной</b>
+          </div>
+        </div>
+
+        <div class="map-box">
+          <iframe
+            src="https://yandex.ru/map-widget/v1/?ll=30.347000%2C59.931000&z=16&pt=30.347000,59.931000,pm2rdm"
+            width="100%" height="100%" frameborder="0" allowfullscreen="true"
+            loading="lazy" title="Офис на карте Санкт-Петербурга"></iframe>
+        </div>
+      </div>
+
+      <!-- right: form -->
+      <div class="form rv">
+        <div class="form-head">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span class="mono">/ заявка на аудит</span>
+        </div>
+
+        <div class="form-body">
+          <form id="leadForm" novalidate>
+            <div class="f-row">
+              <div class="f-field">
+                <label for="fname">Имя *</label>
+                <input type="text" id="fname" name="name" placeholder="Как к вам обращаться" required>
+              </div>
+              <div class="f-field">
+                <label for="fcompany">Компания</label>
+                <input type="text" id="fcompany" name="company" placeholder="Название или сфера">
+              </div>
+            </div>
+
+            <div class="f-row">
+              <div class="f-field">
+                <label for="fphone">Телефон *</label>
+                <input type="tel" id="fphone" name="phone" placeholder="+7 (___) ___-__-__" required>
+              </div>
+              <div class="f-field">
+                <label for="femail">E-mail</label>
+                <input type="email" id="femail" name="email" placeholder="you@company.ru">
+              </div>
+            </div>
+
+            <div class="f-field">
+              <label for="fturnover">Годовая выручка</label>
+              <select id="fturnover" name="turnover">
+                <option value="">Выберите диапазон</option>
+                <option>До 50 млн ₽</option>
+                <option>50 – 150 млн ₽</option>
+                <option>150 – 500 млн ₽</option>
+                <option>500 млн – 1 млрд ₽</option>
+                <option>Более 1 млрд ₽</option>
+                <option>Пока нет выручки</option>
+              </select>
+            </div>
+
+            <div class="f-field">
+              <label for="ftask">Задача</label>
+              <textarea id="ftask" name="task" placeholder="Коротко: что происходит в бизнесе и какой результат хотите получить"></textarea>
+            </div>
+
+            <label class="f-check">
+              <input type="checkbox" id="fagree" required>
+              <span>Согласен на обработку персональных данных. Понимаю, что информация останется строго конфиденциальной.</span>
+            </label>
+
+            <button type="submit" class="btn btn-lg btn-block">Отправить заявку</button>
+            <p class="f-note">Отвечаю лично · В течение рабочего дня</p>
+          </form>
+
+          <div class="f-success" id="leadSuccess">
+            <div class="ok">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <h3>Заявка получена</h3>
+            <p>Спасибо. Свяжусь с вами в течение рабочего дня, чтобы согласовать время бесплатного аудита.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#" class="brand">
+          <span class="brand-mark">МО</span>
+          <span class="brand-name" style="color:#fff">Максим Орлов <span style="color:var(--ink-mute)">/ консалтинг</span></span>
+        </a>
+        <p>Бизнес-консультант. Помогаю собственникам и CEO строить управляемые компании с предсказуемым ростом. Санкт-Петербург · онлайн по всей России.</p>
+      </div>
+
+      <div class="foot">
+        <h4>Разделы</h4>
+        <ul>
+          <li><a href="#problems">Задачи</a></li>
+          <li><a href="#services">Услуги</a></li>
+          <li><a href="#cases">Кейсы</a></li>
+          <li><a href="#process">Процесс</a></li>
+          <li><a href="#faq">Вопросы</a></li>
+        </ul>
+      </div>
+
+      <div class="foot">
+        <h4>Контакты</h4>
+        <ul>
+          <li><a href="tel:+78121234567">+7 (812) 123-45-67</a></li>
+          <li><a href="mailto:hello@orlov-consult.ru">hello@orlov-consult.ru</a></li>
+          <li>Невский пр., 68, офис 412</li>
+          <li>Санкт-Петербург</li>
+        </ul>
+      </div>
+
+      <div class="foot">
+        <h4>Соцсети</h4>
+        <ul>
+          <li><a href="https://t.me/" target="_blank" rel="noopener">Telegram</a></li>
+          <li><a href="https://wa.me/78121234567" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="#" target="_blank" rel="noopener">YouTube</a></li>
+          <li><a href="#" target="_blank" rel="noopener">TenChat</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <span>© 2025 Максим Орлов · Бизнес-консалтинг</span>
+      <span>ИП · ОГРНИП 000000000000000</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================ FAB ============================ -->
+<div class="fab">
+  <a href="https://t.me/" target="_blank" rel="noopener" class="tg" aria-label="Telegram">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3L19 19.1c-.2 1-.8 1.2-1.7.8l-4.6-3.4-2.2 2.1c-.2.2-.5.4-.9.4l.3-4.7 8.5-7.7c.4-.3-.1-.5-.6-.2L7.3 12.9l-4.5-1.4c-1-.3-1-1 .2-1.4l17.5-6.8c.8-.3 1.5.2 1.4 1z"/></svg>
+  </a>
+  <a href="https://wa.me/78121234567" target="_blank" rel="noopener" class="wa" aria-label="WhatsApp">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-1.6-.8-2.7-1.4-3.7-3.2-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5 0-.2-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 1.8.8 2.5.8 3.4.7.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.5-.3zM12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2z"/></svg>
+  </a>
+</div>
+
+<script>
+/* ============================================================
+   SCROLL PROGRESS
+   ============================================================ */
+const progress = document.getElementById('progress');
+function updateProgress(){
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  const p = h > 0 ? (window.scrollY / h) * 100 : 0;
+  progress.style.width = p + '%';
+}
+window.addEventListener('scroll', updateProgress, {passive:true});
+window.addEventListener('resize', updateProgress);
+updateProgress();
+
+/* ============================================================
+   MOBILE DRAWER
+   ============================================================ */
+const burger = document.getElementById('burger');
+const drawer = document.getElementById('drawer');
+burger.addEventListener('click', () => {
+  burger.classList.toggle('on');
+  drawer.classList.toggle('open');
+  document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+});
+drawer.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    burger.classList.remove('on');
+    drawer.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
+/* ============================================================
+   TICKER DUPLICATION
+   ============================================================ */
+(function(){
+  const track = document.getElementById('tickerTrack');
+  const set = track.querySelector('.ticker-set');
+  if (set) {
+    const clone = set.cloneNode(true);
+    track.appendChild(clone);
+  }
+})();
+
+/* ============================================================
+   REVEAL ON SCROLL
+   ============================================================ */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('in'), i * 90);
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -70px 0px' });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+/* ============================================================
+   FAQ ACCORDION
+   ============================================================ */
+document.querySelectorAll('#faqList .faq-item').forEach(item => {
+  const btn = item.querySelector('.faq-q');
+  const ans = item.querySelector('.faq-a');
+  btn.addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    // close all
+    document.querySelectorAll('#faqList .faq-item').forEach(other => {
+      other.classList.remove('open');
+      other.querySelector('.faq-a').style.maxHeight = null;
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      ans.style.maxHeight = ans.scrollHeight + 'px';
+    }
+  });
+});
+
+/* ============================================================
+   PHONE MASK
+   ============================================================ */
+const phoneInput = document.getElementById('fphone');
+phoneInput.addEventListener('focus', (e) => {
+  if (!e.target.value) e.target.value = '+7 (';
+});
+phoneInput.addEventListener('input', (e) => {
+  let v = e.target.value.replace(/\D/g, '');
+  if (v.startsWith('8')) v = '7' + v.slice(1);
+  if (!v.startsWith('7')) v = '7' + v;
+  v = v.slice(0, 11);
+  let out = '+7';
+  if (v.length > 1) out += ' (' + v.slice(1, 4);
+  if (v.length >= 5) out += ') ' + v.slice(4, 7);
+  if (v.length >= 8) out += '-' + v.slice(7, 9);
+  if (v.length >= 10) out += '-' + v.slice(9, 11);
+  e.target.value = out;
+});
+
+/* ============================================================
+   FORM SUBMIT
+   ============================================================ */
+const leadForm = document.getElementById('leadForm');
+const leadSuccess = document.getElementById('leadSuccess');
+leadForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  let valid = true;
+
+  const fname = document.getElementById('fname');
+  const fagree = document.getElementById('fagree');
+
+  [fname, phoneInput].forEach(f => {
+    f.classList.remove('err');
+    const bad = !f.value.trim() || (f === phoneInput && f.value.replace(/\D/g,'').length < 11);
+    if (bad) { f.classList.add('err'); valid = false; }
+  });
+
+  if (!fagree.checked) {
+    valid = false;
+    fagree.parentElement.style.color = '#FF5B4A';
+  } else {
+    fagree.parentElement.style.color = '';
+  }
+
+  if (!valid) {
+    const firstErr = leadForm.querySelector('.err');
+    if (firstErr) firstErr.focus({preventScroll:false});
+    return;
+  }
+
+  const btn = leadForm.querySelector('button[type="submit"]');
+  btn.textContent = 'Отправляем…';
+  btn.disabled = true;
+  btn.style.opacity = '.7';
+
+  // Здесь можно отправить данные на сервер:
+  // fetch('/api/lead', { method:'POST', body:new FormData(leadForm) })
+
+  setTimeout(() => {
+    leadForm.style.display = 'none';
+    leadSuccess.classList.add('show');
+    leadSuccess.scrollIntoView({ behavior:'smooth', block:'center' });
+  }, 700);
+});
+
+/* ============================================================
+   SMOOTH ANCHORS (offset for sticky nav)
+   ============================================================ */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e){
+    const href = this.getAttribute('href');
+    if (!href || href === '#' || href.length < 2) return;
+    const target = document.querySelector(href);
+    if (!target) return;
+    e.preventDefault();
+    const top = target.getBoundingClientRect().top + window.pageYOffset - 76;
+    window.scrollTo({ top, behavior:'smooth' });
+  });
+});
+
+/* ============================================================
+   HERO PHOTO SUBTLE PARALLAX (desktop only)
+   ============================================================ */
+if (window.matchMedia('(min-width: 1081px)').matches) {
+  const heroPhoto = document.querySelector('.hero-photo img');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y < 900 && heroPhoto) {
+      heroPhoto.style.transform = `scale(1.03) translateY(${y * 0.04}px)`;
+    }
+  }, {passive:true});
+}
+</script>
+</body>
+</html>
